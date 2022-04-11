@@ -1,7 +1,6 @@
 name: lint-test
 
-on:
-  push:
+on: {}
 
 jobs:
   lint-test:
