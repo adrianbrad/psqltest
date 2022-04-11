@@ -65,12 +65,12 @@ func NewTransactionTestingDB(t *testing.T) *sql.DB {
 func NewTransactionDB(dsn string) (*sql.DB, error) {
 	db, err := sql.Open(driver, dsn)
 	if err != nil {
-		return nil, fmt.Errorf("open txdb conn: %s", err)
+		return nil, fmt.Errorf("open txdb conn: %w", err)
 	}
 
 	err = db.Ping()
 	if err != nil {
-		return nil, fmt.Errorf("ping: %s", err)
+		return nil, fmt.Errorf("ping: %w", err)
 	}
 
 	return db, nil
