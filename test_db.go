@@ -39,8 +39,9 @@ func Register(dsn string) {
 	txdb.Register(driver, psqlDriver, dsn)
 }
 
-// NewDB returns a new transaction DB connection.
-func NewDB(t *testing.T) *sql.DB {
+// NewTransactionTestingDB returns a new transaction DB connection.
+// It acts as a test helper and also takes care of closing the db.
+func NewTransactionTestingDB(t *testing.T) *sql.DB {
 	t.Helper()
 
 	db, err := sql.Open(driver, t.Name())
@@ -58,4 +59,19 @@ func NewDB(t *testing.T) *sql.DB {
 	})
 
 	return db
+}
+
+// NewTransactionDB returns a new transaction DB connection.
+func NewTransactionDB(dsn string) (*sql.DB, error) {
+	db, err := sql.Open(driver, dsn)
+	if err != nil {
+		return nil, fmt.Errorf("open txdb conn: %s", err)
+	}
+
+	err = db.Ping()
+	if err != nil {
+		return nil, fmt.Errorf("ping: %s", err)
+	}
+
+	return db, nil
 }
