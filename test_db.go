@@ -1,14 +1,11 @@
 package psqltest
 
 import (
-	"bytes"
 	"database/sql"
 	"fmt"
 	"testing"
 
 	"github.com/DATA-DOG/go-txdb"
-	"github.com/goccy/go-yaml"
-	"github.com/romanyx/polluter"
 )
 
 const (
@@ -20,19 +17,6 @@ const (
 	psqlDriver = "postgres"
 )
 
-// Pollute is a function to insert data in a database based on a YAML.
-// Used only for testing.
-func Pollute(pollution interface{}, db *sql.DB) error {
-	yamlPollution, err := yaml.Marshal(pollution)
-	if err != nil {
-		return fmt.Errorf("err while marshalling pollution yaml: %w", err)
-	}
-
-	return polluter.
-		New(polluter.PostgresEngine(db)).
-		Pollute(bytes.NewReader(yamlPollution))
-}
-
 // Register is a wrapper over txdb.Register.
 // Used to register the txdb driver.
 func Register(dsn string) {
@@ -40,20 +24,25 @@ func Register(dsn string) {
 }
 
 // NewTransactionTestingDB returns a new transaction DB connection.
-// It acts as a test helper and also takes care of closing the db.
+// It acts as a test helper and also takes care of closing the DB connection.
 func NewTransactionTestingDB(t *testing.T) *sql.DB {
+	// mark this function as a test helper
 	t.Helper()
 
+	// open a new database connection in a SQL transaction.
 	db, err := sql.Open(driver, t.Name())
 	if err != nil {
 		t.Fatalf("open txdb conn: %s", err)
 	}
 
+	// ping the database to ensure connection validity.
 	err = db.Ping()
 	if err != nil {
 		t.Fatalf("ping: %s", err)
 	}
 
+	// register a cleanup function that closes the database
+	// connection thus reverting the transaction.
 	t.Cleanup(func() {
 		_ = db.Close()
 	})
