@@ -18,4 +18,3 @@
 Go package providing testing utilities for PostgreSQL.
 
 - Open a new PostgreSQL database connection that runs in an SQL transaction. Powered by: https://github.com/DATA-DOG/go-txdb
-- Insert data into a PostgreSQL using `yaml` files.
