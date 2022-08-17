@@ -7,8 +7,13 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/adrianbrad/psqltest/badge)](https://www.codefactor.io/repository/github/adrianbrad/psqltest)
 [![Go Report Card](https://goreportcard.com/badge/github.com/adrianbrad/psqltest)](https://goreportcard.com/report/github.com/adrianbrad/psqltest)
-[![lint-test](https://github.com/adrianbrad/psqltest/workflows/lint-test/badge.svg)](https://github.com/adrianbrad/psqltest/actions?query=workflow%3Alint-test)
 [![codecov](https://codecov.io/gh/adrianbrad/psqltest/branch/main/graph/badge.svg)](https://codecov.io/gh/adrianbrad/psqltest)
+
+[![lint-test](https://github.com/adrianbrad/psqltest/workflows/lint-test/badge.svg)](https://github.com/adrianbrad/psqltest/actions?query=workflow%3Alint-test)
+[![grype](https://github.com/adrianbrad/psqltest/workflows/grype/badge.svg)](https://github.com/adrianbrad/psqltest/actions?query=workflow%3Agrype)
+[![codeql](https://github.com/adrianbrad/psqltest/workflows/CodeQL/badge.svg)](https://github.com/adrianbrad/psqltest/actions?query=workflow%3ACodeQL)
+[![gitleaks](https://github.com/adrianbrad/psqltest/workflows/gitleaks/badge.svg)](https://github.com/adrianbrad/psqltest/actions?query=workflow%3Agitleaks)
+
 ---
 Go package providing testing utilities for PostgreSQL.
 
