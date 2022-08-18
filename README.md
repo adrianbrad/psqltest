@@ -1,7 +1,5 @@
 # 🔬 psqltest ![GitHub release](https://img.shields.io/github/v/release/adrianbrad/psqltest)
-[![gitleaks](https://img.shields.io/badge/protected%20by-gitleaks-blue)](https://github.com/zricethezav/gitleaks-action)
 
-[![made-with-Go](https://img.shields.io/badge/Made%20with-Go-1f425f.svg)](https://go.dev/)
 [![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/adrianbrad/psqltest)](https://github.com/adrianbrad/psqltest)
 [![GoDoc reference example](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/adrianbrad/psqltest)
 
