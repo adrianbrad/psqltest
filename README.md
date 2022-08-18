@@ -1,4 +1,4 @@
-# 🔬 psqltest
+# 🔬 psqltest ![GitHub release](https://img.shields.io/github/v/release/adrianbrad/psqltest)
 [![gitleaks](https://img.shields.io/badge/protected%20by-gitleaks-blue)](https://github.com/zricethezav/gitleaks-action)
 
 [![made-with-Go](https://img.shields.io/badge/Made%20with-Go-1f425f.svg)](https://go.dev/)
@@ -16,5 +16,7 @@
 
 ---
 Go package providing testing utilities for PostgreSQL.
+
+[Here](https://adrianbrad.medium.com/parallel-postgresql-tests-go-docker-6fb51c016796) is an article expanding on the usage of this package.
 
 - Open a new PostgreSQL database connection that runs in an SQL transaction. Powered by: https://github.com/DATA-DOG/go-txdb
