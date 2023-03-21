@@ -1,3 +1,9 @@
+## v1.2.0 (2023-03-21)
+
+### Feat
+
+- add new register with custom psql driver function
+
 ## v1.1.1 (2022-08-29)
 
 ### Refactor
