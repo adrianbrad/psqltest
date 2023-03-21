@@ -9,18 +9,24 @@ import (
 )
 
 const (
-	// driver is used in order to open a new
+	// txDBDriver is used in order to open a new
 	// transaction when opening a docker db.
-	driver = "pgsqltx"
+	txDBDriver = "pgsqltx"
 
 	// psqlDriver is used to register txdb.
 	psqlDriver = "postgres"
 )
 
 // Register is a wrapper over txdb.Register.
-// Used to register the txdb driver.
+// Used to register the txdb txDBDriver.
 func Register(dsn string) {
-	txdb.Register(driver, psqlDriver, dsn)
+	txdb.Register(txDBDriver, psqlDriver, dsn)
+}
+
+// RegisterWithPSQLDriver is a wrapper over txdb.Register.q
+// Used to register the txdb driver with a custom psql driver.
+func RegisterWithPSQLDriver(dsn, psqlDriver string) {
+	txdb.Register(txDBDriver, psqlDriver, dsn)
 }
 
 // NewTransactionTestingDB returns a new transaction DB connection.
@@ -30,7 +36,7 @@ func NewTransactionTestingDB(t *testing.T) *sql.DB {
 	t.Helper()
 
 	// open a new database connection in a SQL transaction.
-	db, err := sql.Open(driver, t.Name())
+	db, err := sql.Open(txDBDriver, t.Name())
 	if err != nil {
 		t.Fatalf("open txdb conn: %s", err)
 	}
@@ -44,7 +50,9 @@ func NewTransactionTestingDB(t *testing.T) *sql.DB {
 	// register a cleanup function that closes the database
 	// connection thus reverting the transaction.
 	t.Cleanup(func() {
-		_ = db.Close()
+		if err := db.Close(); err != nil {
+			t.Errorf("close error: %s", err)
+		}
 	})
 
 	return db
@@ -52,7 +60,7 @@ func NewTransactionTestingDB(t *testing.T) *sql.DB {
 
 // NewTransactionDB returns a new transaction DB connection.
 func NewTransactionDB(dsn string) (*sql.DB, error) {
-	db, err := sql.Open(driver, dsn)
+	db, err := sql.Open(txDBDriver, dsn)
 	if err != nil {
 		return nil, fmt.Errorf("open txdb conn: %w", err)
 	}
